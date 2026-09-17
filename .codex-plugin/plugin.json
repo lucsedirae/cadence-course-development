@@ -1,0 +1,18 @@
+{
+  "name": "cadence",
+  "version": "0.1.0+codex.20260917020013",
+  "description": "Build and review curriculum through ADDIE using separate course-content and institutional-process libraries.",
+  "author": {
+    "name": "Local developer"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Cadence",
+    "shortDescription": "Create curriculum from sources and institutional guidance.",
+    "longDescription": "Cadence guides curriculum review and development through ADDIE, retrieves evidence from two separate local libraries, and delegates focused work to predefined specialist roles.",
+    "developerName": "Local developer",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": "Help me build a course from my materials and institutional guidance."
+  }
+}
