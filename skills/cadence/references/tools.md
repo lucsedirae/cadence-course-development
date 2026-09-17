@@ -6,15 +6,19 @@ Use Python 3.10+ with SQLite FTS5. Plain text and Markdown need no additional pa
 
 In the examples, `TOOL` means the absolute path to this skill's `scripts/cadence.py`, and `COURSE` means the absolute course folder. Substitute real paths; quote paths with spaces.
 
+For a new project, complete [intake.md](intake.md) before `init`. The CLI uses the saved project name; `--title` is optional and, when supplied for a new project, must match intake. Existing courses resume without repeating the questionnaire.
+
 ## Initialize and import
 
 ```text
-python3 TOOL init --project COURSE --title "Course title"
+python3 TOOL init --project COURSE
 python3 TOOL ingest --project COURSE --library content /path/to/course.docx /path/to/readings.pdf
 python3 TOOL ingest --project COURSE --library institution /path/to/process.pdf /path/to/lesson-template.docx
 python3 TOOL sources --project COURSE
 python3 TOOL snapshot --project COURSE
 ```
+
+New courses initialized with the CLI automatically index the user-selected catalog from `assets/institution/` into the `institution` library. To adopt or update that guidance in an existing course, explicitly run `python3 TOOL seed-institution --project COURSE`, then create a new source snapshot. Reinitializing an existing course does not silently update its evidence. The stable source copy is under `COURSE/.cadence/institutional-guidance/`; retained versions and citations use the normal library rules.
 
 Explicitly classify files before ingestion. `content` is material to review or teach from. `institution` is the institution's instructional process, requirements, guidance or templates. A document's membership does not prove that every statement is mandatory, current or authoritative; interpret wording, applicability and source authority. Do not silently classify an ambiguous document or copy a subject reference into the institution library to support a policy claim.
 

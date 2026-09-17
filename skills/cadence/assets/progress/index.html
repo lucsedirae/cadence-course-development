@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cadence · Progress</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+<main>
+  <header>
+    <div class="brand"><img src="project-cadence-logo.png" alt="Project Cadence"><span class="brand-sub">workflow</span></div>
+    <span id="mode" class="eyebrow"></span>
+  </header>
+  <p id="demo" class="demo" hidden>Preview · Illustrative milestones, not a live course review</p>
+  <h1 id="title">Course progress</h1>
+  <p id="connection" role="status">Connecting to saved progress…</p>
+  <section class="current" aria-labelledby="current-heading">
+    <div class="current-top"><h2 id="current-heading">Right now</h2><span id="run-status" class="badge">Waiting for data</span></div>
+    <p id="note">Loading the latest milestone.</p>
+    <p id="updated" class="quiet"></p>
+  </section>
+  <details id="profile" hidden><summary>Course intake</summary><dl id="profile-answers"></dl></details>
+  <section aria-labelledby="phase-heading">
+    <div class="section-head"><h2 id="phase-heading">Through ADDIE</h2><span id="phase-count" class="quiet"></span></div>
+    <ol id="phases" class="phases"></ol>
+    <p class="caption">Milestones show recorded work, not time remaining or institutional approval.</p>
+  </section>
+  <section id="sections-panel" aria-labelledby="sections-heading" hidden>
+    <h2 id="sections-heading">Phase documents and sections</h2>
+    <p class="caption">A checkmark means the section is finished and has a saved supporting document. Approval is recorded separately.</p>
+    <div id="sections"></div>
+  </section>
+  <section id="specialists-section" aria-labelledby="specialist-heading">
+    <h2 id="specialist-heading">Specialist work</h2>
+    <ul id="agents" class="rows"></ul>
+    <p id="no-agents" class="quiet">No specialist assignments recorded yet.</p>
+  </section>
+  <section aria-labelledby="output-heading">
+    <h2 id="output-heading">Deliverables</h2>
+    <ul id="artifacts" class="rows"></ul>
+    <p id="no-artifacts" class="quiet">Deliverables appear here when files are saved.</p>
+  </section>
+  <details id="evidence"><summary>Sources and recent milestones</summary>
+    <p id="libraries" class="quiet"></p>
+    <ol id="events" class="events"></ol>
+  </details>
+  <footer>Progress is saved with the course. This view checks for updates every two seconds.</footer>
+</main>
+</body>
+</html>

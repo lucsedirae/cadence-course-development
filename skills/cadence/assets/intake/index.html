@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cadence · Start a course</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="intake.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+<main>
+  <header><span class="brand">cadence<span aria-hidden="true"> / </span><span class="brand-sub">start a course</span></span></header>
+  <p id="preview" class="demo" hidden>Preview · Try the form with sample answers.</p>
+  <h1>Let’s start with the basics.</h1>
+  <p class="intro">Seven quick questions to help shape your course.</p>
+  <p id="loading" role="status">Loading your intake…</p>
+  <form id="intake" hidden>
+    <ol id="steps" aria-label="Intake progress"></ol>
+    <fieldset id="question"></fieldset>
+    <p id="hint" class="quiet"></p>
+    <p id="error" role="alert" hidden></p>
+    <div class="actions"><button id="back" type="button">Back</button><button id="next" type="submit">Continue</button></div>
+  </form>
+  <section id="saved" tabindex="-1" hidden>
+    <h2 id="saved-heading">You’re ready to begin.</h2>
+    <p id="saved-note">Your answers are saved. Return to chat and tell Cadence to continue.</p>
+    <dl id="answers"></dl>
+  </section>
+  <footer>Your answers stay with this course on your computer.</footer>
+</main>
+</body>
+</html>

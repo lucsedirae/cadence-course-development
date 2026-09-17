@@ -4,6 +4,8 @@ Create and review curriculum through ADDIE using two separate local source libra
 
 ## Start a course
 
+New projects begin with a seven-question intake: project name, build/review intent, delivery format, learner group, course duration, your role, and source availability. Cadence opens a short form in the browser panel, one question at a time, with Back/Continue and “Not sure yet” choices. Answers are saved with the course and used in its scope brief and specialist work. Existing projects resume without repeating intake. If a browser panel is unavailable, Cadence asks the same questions in chat. See [intake guidance](skills/cadence/references/intake.md).
+
 After installing the plugin, start a new Codex task and select the **Cadence** skill. For example:
 
 > Use Cadence to build this course. These files contain course content, and these files describe our institution's instructional process. Use specialist subagents as needed and assemble instructor-ready curriculum through ADDIE.
@@ -19,11 +21,19 @@ Formal audits pause after every phase. In either mode, reports retain sources, c
 | Content | Existing curriculum, subject references, readings and teaching material |
 | Institution | Local instructional process, policies, standards and templates |
 
-No institutional documents or course content are preloaded. The bundled ADDIE guide is a working method, not a claim about your institution's rules. Institution-specific claims need supporting evidence from your documents.
+No course content is preloaded. The user-selected ADDIE artifact catalog is included in the institutional RAG source folder, `skills/cadence/assets/institution/`, and new course initialization indexes it into the institution library. Existing courses can explicitly adopt it with the `seed-institution` command before taking a new source snapshot. The bundled ADDIE guide is a working method, not a claim about your institution's rules. Institution-specific claims need supporting evidence from your documents.
 
 The coordinator can deploy an institutional process analyst, subject expert, instructional designer, assessment specialist, exercise specialist and independent quality reviewer. Each gets a focused assignment and its predefined prompt. These use the host's native subagents and inherited model; no extra provider key is required. If that capability is unavailable, the plugin discloses sequential checks rather than claiming independent agents ran.
 
+## Live workflow progress
+
+Cadence can open a live panel beside the Codex conversation, with the Project Cadence logo at the top. It shows the five ADDIE phases, real specialist assignments (or clearly labeled sequential checks), waiting decisions, and saved deliverables. The coordinator updates these markers at meaningful checkpoints. The panel checks for saved updates every two seconds and shows the last milestone time; it does not estimate a completion percentage or independently monitor agent execution.
+
+The viewer runs locally using Python's standard library. Progress persists in each course's `.cadence/progress.json`; a new run can archive the earlier record. If the viewer stops, the panel reports a disconnected state. Hosts without a browser panel can show compact phase markers in chat. See the [progress reference](skills/cadence/references/progress.md) for commands and host integration. This is an in-app browser panel, not a new native Codex sidebar. Start a new Codex task after updating the plugin to pick up this workflow.
+
 ## Deliverables
+
+Catalog-governed builds produce an **Analysis Summary Report**, a **Course Design Document**, and the applicable Development artifacts. The progress panel shows four Analysis subsection markers, six Design markers, and 22 Development artifact types across five categories. A completion checkmark requires a nonempty supporting file; skipped or missing artifacts remain distinct. The check verifies saved evidence, not educational quality or institutional approval. See the [artifact guidance](skills/cadence/references/artifact-deliverables.md).
 
 A build produces actual teaching and learning materials appropriate to the requested scope, plus objective/activity/check traceability and a concise source/decision record. Markdown is the initial portable output. When suitable host document capabilities are available, requested audit reports and curriculum packages can also be delivered as visually checked Word documents. Cadence retains a navy-and-Aptos Word baseline modeled on the established institutional review package; applicable institutional templates and explicit user directions take precedence. True inline comments are anchored to the precise affected wording rather than a general gap summary.
 
@@ -48,12 +58,12 @@ Supported sources: TXT, Markdown, DOCX, PDF and PPTX, up to 1 GB per file; PDFs 
 
 ## Development and checks
 
-The source plugin lives in `plugins/cadence` in the project repository. Personal marketplace installation is separate from the web app.
+This repository contains the Cadence Codex plugin, including `.codex-plugin/plugin.json`, its workflow, local source-library tools, intake form, and progress viewer. Develop on `dev`; the repository owner handles merges into `main`.
 
 ```sh
-python3 -m unittest discover -s plugins/cadence/tests -v
+python3 -m unittest discover -s tests -v
 ```
 
 Use an interpreter with the parser dependencies to run the complete suite. Tests use synthetic files and no provider calls. The fixtures also support a manual skill check: ask for a 60-minute project-update workshop using the content and institutional files, then examine the curriculum, source citations and ADDIE status. Automated parser and library checks do not establish educational quality.
 
-Public publication, hosted MCP, semantic embeddings and the earlier web application's collaboration features are outside this first delivery.
+Hosted MCP, semantic embeddings and the earlier web application's collaboration features are outside this first delivery.

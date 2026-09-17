@@ -22,17 +22,23 @@ For builds and authorized revisions, use the outcomes below with the same five p
 
 ## Analysis
 
+Apply [artifact-deliverables.md](artifact-deliverables.md): save the catalog's consolidated **Analysis Summary Report**, including its needs assessment, JTA, doctrinal synthesis, and source sufficiency sections. The shorter records below can support that report; they do not replace it for a catalog-governed build.
+
 Establish the course's purpose, learners, entry knowledge, intended performance, delivery conditions, and available resources. Review existing materials and the applicable institutional process. Separate demonstrated needs from assumptions. Where a performance problem motivates the work, consider whether access, process, incentives, workload, or resources explain it before treating instruction as the solution.
 
 **Save:** a concise course or lesson brief, a source inventory, and the few unresolved assumptions that affect design. For a review, state which material was inspected and what the requested evaluation can establish.
 
 ## Design
 
+Save the catalog's consolidated **Course Design Document**, with all six numbered sections and traceability back to the Analysis Summary Report. Maintain its subsection completion markers as each section is written and checked.
+
 Translate the agreed purpose into observable objectives, a sequence of lessons, meaningful practice, and proportionate evidence of learning. Fit workload and activities to the known learners and delivery setting. Link each objective to the lesson, activity, and learning check that supports it. Use institutional templates and required review stages when the retrieved evidence establishes their applicability.
 
 **Save:** a course map or lesson design, proposed schedule, and objective/activity/check traceability. For a narrow revision, update only the affected parts while noting consequential dependencies. Do not infer an assessment problem merely because an assessment was not included in an initial excerpt.
 
 ## Development
+
+Use the catalog's 22 artifact types across five categories as the artifact plan, following [artifact-deliverables.md](artifact-deliverables.md). Produce the applicable documents, retain explained exclusions, and keep a separate completion marker for every type. The general table below supplements that catalog; it does not replace its named outputs.
 
 Create usable materials from the design and cited subject sources. A build request is unfinished if it contains only headings, placeholders, a plan to write, or recommendations for someone else to create the instructional content.
 

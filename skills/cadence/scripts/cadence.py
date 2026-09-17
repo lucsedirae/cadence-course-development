@@ -15,6 +15,8 @@ import sys
 import tempfile
 
 from extract import extract_file
+from artifact_catalog import INSTITUTION_DIR
+import intake
 
 LIBRARIES = ("content", "institution")
 SCHEMA_VERSION = 1
@@ -98,6 +100,31 @@ def chunks(text):
         if end == len(text):
             break
         start = max(start + 1, end - CHUNK_OVERLAP)
+
+
+def seed_institution(project, directory=None):
+    """Copy selected institutional guidance to a stable per-course import path."""
+    source_dir = Path(directory) if directory is not None else INSTITUTION_DIR
+    files = sorted(source_dir.glob("*.md"))
+    if not files:
+        raise ValueError("No bundled institutional guidance was found.")
+    with closing(connect(project)):
+        pass
+    target_dir = state_path(project) / "institutional-guidance"
+    target_dir.mkdir(exist_ok=True)
+    result = []
+    for source in files:
+        target = target_dir / source.name
+        descriptor, temporary = tempfile.mkstemp(prefix=".guidance-", dir=target_dir)
+        try:
+            with os.fdopen(descriptor, "wb") as output:
+                output.write(source.read_bytes())
+            os.replace(temporary, target)
+        finally:
+            if os.path.exists(temporary):
+                os.unlink(temporary)
+        result.append(ingest(project, "institution", target))
+    return {"imported": result, "next": "Create a source snapshot before using the institutional passages."}
 
 
 def source_data(row):
@@ -292,11 +319,11 @@ def check_citations(project, filenames, snapshot_id=None):
 def parser():
     cli = argparse.ArgumentParser(description=__doc__)
     commands = cli.add_subparsers(dest="command", required=True)
-    for name in ("init", "ingest", "sources", "search", "read", "passages", "snapshot", "check-citations"):
+    for name in ("init", "seed-institution", "ingest", "sources", "search", "read", "passages", "snapshot", "check-citations"):
         command = commands.add_parser(name)
         command.add_argument("--project", required=True, help="Course folder; libraries are private to this folder")
         if name == "init":
-            command.add_argument("--title", required=True)
+            command.add_argument("--title", help="Uses the saved intake name for a new project")
         if name in ("ingest", "search", "sources"):
             command.add_argument("--library", choices=LIBRARIES, required=name != "sources")
         if name in ("ingest", "check-citations"):
@@ -322,7 +349,19 @@ def main(argv=None):
     args = parser().parse_args(argv)
     try:
         if args.command == "init":
-            result = initialize(args.project, args.title)
+            title = args.title
+            if not (state_path(args.project) / "library.sqlite3").exists():
+                profile = intake.read(args.project)
+                if profile is None:
+                    raise ValueError("Complete the new-project intake first using intake.py serve or save.")
+                if title and title != profile["answers"]["title"]:
+                    raise ValueError("The project name must match the saved intake.")
+                title = profile["answers"]["title"]
+            result = initialize(args.project, title or Path(args.project).name)
+            if not result["existing"]:
+                result["institutional_guidance"] = seed_institution(args.project)
+        elif args.command == "seed-institution":
+            result = seed_institution(args.project)
         elif args.command == "ingest":
             result = {"imported": [], "errors": []}
             for filename in args.files:
